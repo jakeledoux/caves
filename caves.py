@@ -49,7 +49,12 @@ def press_enter():
 clear()
 print("Welcome to CAVES, young traveler.\n")
 
-name = input("Enter your name: ").strip().title()
+# Get player name
+while True:
+    name = input("Enter your name: ").strip().title()
+    # Check if name is valid
+    if name:
+        break
 
 # Initialize player stats
 xp = 0
@@ -95,8 +100,8 @@ while health > 0:
         # Give player between 200 and 1500 xp
         xp += random.randrange(200, 1501)
     else:
-        print("\n  Poor choice! You encounter great peril within \
-              that evil place.")
+        print("\n  Poor choice! You encounter great peril within"
+              " that evil place.")
         # Choose a damage value between 1 and 99.
         # This prevents the player being killed in one hit.
         damage = random.randrange(1, 100)
@@ -104,8 +109,8 @@ while health > 0:
         # Give player between 20 and 100 xp
         xp += random.randrange(20, 101)
 
-        print(f"  In a run-in with a terrible {enemy} you \
-              suffer {damage} damage.")
+        print(f"  In a run-in with a terrible {enemy} you"
+              " suffer {damage} damage.")
         health -= damage
 
     if health > 0:
