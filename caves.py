@@ -95,7 +95,7 @@ while health > 0:
         # Give player between 200 and 1500 xp
         xp += random.randrange(200, 1501)
     else:
-        print("\n  Poor choice! You encounter great peril within\
+        print("\n  Poor choice! You encounter great peril within \
               that evil place.")
         # Choose a damage value between 1 and 99.
         # This prevents the player being killed in one hit.
