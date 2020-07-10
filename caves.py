@@ -78,7 +78,7 @@ while health > 0:
     clear()
 
     if choice == correct_choice:
-        print("\n  You chose wisely! You emerge from the cave unscathed and with new loot.")
+        print("\n  You chose wisely! You emerge from the cave unscathed\n  and with new loot.")
         # Give player a random item
         inventory.append(random.choice(LOOT_OPTIONS))
         # Give player between 0 and 100 gold
@@ -86,11 +86,15 @@ while health > 0:
         # Give player between 200 and 1500 xp
         xp += random.randrange(200, 1501)
     else:
-        print("\n  Poor choice. You encounter great peril within that evil place.")
+        print("\n  Poor choice! You encounter great peril within that evil place.")
         # Choose a damage value between 1 and 99. (Prevents 1-hit killing player)
         damage = random.randrange(1, 100)
         enemy = random.choice(ENEMY_OPTIONS)
-        print(f"  In a run-in with a terrible {enemy} and you suffer {damage} damage.")
+        
+        # Give player between 20 and 100 xp
+        xp += random.randrange(20, 101)
+        
+        print(f"  In a run-in with a terrible {enemy} you suffer {damage} damage.")
         health -= damage
 
     if health > 0:
