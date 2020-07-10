@@ -3,20 +3,24 @@ import random
 
 ENEMY_OPTIONS = ['skeleton', 'bear', 'vampire', 'demon', 'dragon', 'Mezrah',
                  'ogre', 'man-eating spider', 'large squirrel']
-LOOT_OPTIONS =  ['gilded sword', 'potion of long eyelashes', '$15 iTunes gift card',
-                 'pip-boy', 'assassins creed wrist dagger', 'x-ray glasses',
-                 'Half-Life 3', 'ET', 'rollerskates', 'a pompadour wig',
-                 'wooden shield', 'the matrix sunglasses', 'desert eagle',
-                 'metal shield', 'golden shield', 'diamond shield', 'wooden sword',
-                 'bronze sword', 'silver sword', 'diamond sword', 'a wiimote',
-                 'nintendo ds', 'indiana jones 4 on dvd', 'iphone 4',
-                 'guns n roses poster', 'chain-mail armor', 'leather armor',
-                 'nike sneakers', 'sneakers of high jumping', 'tapout backpack',
-                 'tears for fears t-shirt', 'skyrim helmet', 'plastic bag helmet',
-                 'g36 assault rifle', 'lightsaber']
+LOOT_OPTIONS = ['gilded sword', 'potion of long eyelashes',
+                '$15 iTunes gift card', 'pip-boy',
+                'assassins creed wrist dagger', 'x-ray glasses',
+                'Half-Life 3', 'ET', 'rollerskates', 'a pompadour wig',
+                'wooden shield', 'the matrix sunglasses', 'desert eagle',
+                'metal shield', 'golden shield', 'diamond shield',
+                'wooden sword', 'bronze sword', 'silver sword',
+                'diamond sword', 'a wiimote', 'nintendo ds',
+                'indiana jones 4 on dvd', 'iphone 4',
+                'guns n roses poster', 'chain-mail armor', 'leather armor',
+                'nike sneakers', 'sneakers of high jumping', 'tapout backpack',
+                'tears for fears t-shirt', 'skyrim helmet',
+                'plastic bag helmet', 'g36 assault rifle', 'lightsaber']
+
 
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
+
 
 def show_player_status():
     # Print player status
@@ -26,17 +30,21 @@ def show_player_status():
     print(f"Lvl: {xp // 1000} ({xp % 1000}/1000 xp)")
     print(f"Gold: {gold}")
     print(f"Caves survived: {caves_survived}")
-    print(f"\nYour inventory consists of these items:")
+    print("\nYour inventory consists of these items:")
+
+    # Print all items in inventory
     if inventory:
         for item in inventory:
             print("  * " + item)
     else:
-        print("  *nothing*")
+        print("  ~nothing~")
 
     press_enter()
 
+
 def press_enter():
     input("\nPress enter to continue...")
+
 
 clear()
 print("Welcome to CAVES, young traveler.\n")
@@ -78,7 +86,8 @@ while health > 0:
     clear()
 
     if choice == correct_choice:
-        print("\n  You chose wisely! You emerge from the cave unscathed\n  and with new loot.")
+        print("\n  You chose wisely! You emerge from the cave unscathed")
+        print("  and with new loot.")
         # Give player a random item
         inventory.append(random.choice(LOOT_OPTIONS))
         # Give player between 0 and 100 gold
@@ -86,15 +95,17 @@ while health > 0:
         # Give player between 200 and 1500 xp
         xp += random.randrange(200, 1501)
     else:
-        print("\n  Poor choice! You encounter great peril within that evil place.")
-        # Choose a damage value between 1 and 99. (Prevents 1-hit killing player)
+        print("\n  Poor choice! You encounter great peril within\
+              that evil place.")
+        # Choose a damage value between 1 and 99.
+        # This prevents the player being killed in one hit.
         damage = random.randrange(1, 100)
         enemy = random.choice(ENEMY_OPTIONS)
-        
         # Give player between 20 and 100 xp
         xp += random.randrange(20, 101)
-        
-        print(f"  In a run-in with a terrible {enemy} you suffer {damage} damage.")
+
+        print(f"  In a run-in with a terrible {enemy} you \
+              suffer {damage} damage.")
         health -= damage
 
     if health > 0:
