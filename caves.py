@@ -1,6 +1,7 @@
 import os
 import random
 
+# TODO: Replace constants with data files
 ENEMY_OPTIONS = ['skeleton', 'bear', 'vampire', 'demon', 'dragon', 'Mezrah',
                  'ogre', 'man-eating spider', 'large squirrel']
 LOOT_OPTIONS = ['gilded sword', 'potion of long eyelashes',
