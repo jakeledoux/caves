@@ -26,11 +26,11 @@ def clear():
 def show_player_status():
     # Print player status
     clear()
-    print(f"Player '{name}' Stats")
-    print(f"HP: {health}/100")
-    print(f"Lvl: {xp // 1000} ({xp % 1000}/1000 xp)")
-    print(f"Gold: {gold}")
-    print(f"Caves survived: {caves_survived}")
+    print("Player '" + name + "' Stats")
+    print("HP: " + str(health) + "/100")
+    print("Lvl: " + str(xp // 1000) + " (" + str(xp % 1000) + "/1000 xp)")
+    print("Gold:", gold)
+    print("Caves caves_survived:", caves_survived)
     print("\nYour inventory consists of these items:")
 
     # Print all items in inventory
@@ -85,7 +85,7 @@ while health > 0:
         else:
             print("\nInvalid choice. (you must type either 'left' or 'right')")
 
-    print(f"\n  You've selected the {choice} cave.")
+    print("\n  You've selected the", choice, "cave.")
     print("  You enter the cave, unsure of what awaits you...")
     press_enter()
 
@@ -94,8 +94,13 @@ while health > 0:
     if choice == correct_choice:
         print("\n  You chose wisely! You emerge from the cave unscathed")
         print("  and with new loot.")
-        # Give player a random item
-        inventory.append(random.choice(LOOT_OPTIONS))
+
+        # Choose how many items the player will receive
+        # (between 1 and 3)
+        for i in range(random.randrange(1, 4)):
+            # Give player a random item
+            inventory.append(random.choice(LOOT_OPTIONS))
+
         # Give player between 0 and 100 gold
         gold += random.randrange(101)
         # Give player between 200 and 1500 xp
@@ -110,8 +115,11 @@ while health > 0:
         # Give player between 20 and 100 xp
         xp += random.randrange(20, 101)
 
-        print(f"  In a run-in with a terrible {enemy} you"
-              " suffer {damage} damage.")
+        # I split up "you" and "suffer ..." simply to keep
+        # the line from getting to long, there's no real
+        # technical reason for it.
+        print("  In a run-in with a terrible", enemy, "you",
+              "suffer", damage, "damage.")
         health -= damage
 
     if health > 0:
@@ -120,5 +128,5 @@ while health > 0:
 
 clear()
 print("YOU DIED. GAME OVER.")
-print(f"Caves survived: {caves_survived}")
+print("Caves survived:", caves_survived)
 press_enter()
