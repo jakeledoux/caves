@@ -6,3 +6,5 @@ A simplistic text-based dungeon crawler.
 I understand that it does not follow best practices, it needed to
 be as simple as possible to avoid dumping tons of information on
 the poor learner.*
+
+*That also means I can't use f-strings because the poor sap is on python3.5 :(*
