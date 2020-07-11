@@ -30,7 +30,7 @@ def show_player_status():
     print("HP: " + str(health) + "/100")
     print("Lvl: " + str(xp // 1000) + " (" + str(xp % 1000) + "/1000 xp)")
     print("Gold:", gold)
-    print("Caves caves_survived:", caves_survived)
+    print("Caves survived:", caves_survived)
     print("\nYour inventory consists of these items:")
 
     # Print all items in inventory
