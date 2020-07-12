@@ -1,30 +1,17 @@
 import os
 import random
 
-# TODO: Replace constants with data files
-ENEMY_OPTIONS = ['skeleton', 'bear', 'vampire', 'demon', 'dragon', 'Mezrah',
-                 'ogre', 'man-eating spider', 'large squirrel']
-LOOT_OPTIONS = ['gilded sword', 'potion of long eyelashes',
-                '$15 iTunes gift card', 'pip-boy',
-                'assassins creed wrist dagger', 'x-ray glasses',
-                'Half-Life 3', 'ET', 'rollerskates', 'a pompadour wig',
-                'wooden shield', 'the matrix sunglasses', 'desert eagle',
-                'metal shield', 'golden shield', 'diamond shield',
-                'wooden sword', 'bronze sword', 'silver sword',
-                'diamond sword', 'a wiimote', 'nintendo ds',
-                'indiana jones 4 on dvd', 'iphone 4',
-                'guns n roses poster', 'chain-mail armor', 'leather armor',
-                'nike sneakers', 'sneakers of high jumping', 'tapout backpack',
-                'tears for fears t-shirt', 'skyrim helmet',
-                'plastic bag helmet', 'g36 assault rifle', 'lightsaber']
-
 
 def clear():
+    """ Clear the screen
+    """
     os.system("cls" if os.name == "nt" else "clear")
 
 
 def show_player_status():
-    # Print player status
+    """ Prints player status including, HP, level info, gold, number of caves 
+        survived, and inventory.
+    """
     clear()
     print("Player '{name}' Stats".format(name=name))
     print("HP: {health}/100".format(health=health))
@@ -44,8 +31,34 @@ def show_player_status():
 
 
 def press_enter():
+    """ Prompts the player to press enter and waits for input.
+    """
     input("\nPress enter to continue...")
 
+
+def load_file(filename):
+    """ Reads text file at `filename` and returns lines as a list.
+    """
+    with open(filename, 'r') as f:
+        file_contents = f.read()
+    
+    output_list = list()
+    # Split file into list of lines and iterate
+    # through it
+    for line in file_contents.splitlines():
+        # Check if line, after being stripped, is not blank.
+        if line.strip():
+            # Toss it in the output list
+            output_list.append(line.strip())
+    # Hand the output back
+    return output_list
+
+
+# I moved these lines to below the function declarations
+#  because they now rely on one of the functions we wrote.
+ENEMY_OPTIONS = load_file("enemies.dat")
+INJURY_OPTIONS = load_file("injuries.dat")
+LOOT_OPTIONS = load_file("loot.dat")
 
 clear()
 print("Welcome to CAVES, young traveler.\n")
@@ -61,7 +74,7 @@ while True:
 xp = 0
 gold = 0
 health = 100
-inventory = []
+inventory = list()
 caves_survived = 0
 
 while health > 0:
@@ -111,15 +124,24 @@ while health > 0:
         # Choose a damage value between 1 and 99.
         # This prevents the player being killed in one hit.
         damage = random.randrange(1, 100)
-        enemy = random.choice(ENEMY_OPTIONS)
+
+        # Decide whether player is attacked by enemy or
+        # harmed by other means.
+        if random.randrange(2):
+            enemy = random.choice(ENEMY_OPTIONS)
+            # I split up "you" and "suffer ..." simply to keep
+            # the line from getting to long, there's no real
+            # technical reason for it.
+            print("  In a run-in with a terrible", enemy, "you",
+                "suffer", damage, "damage.")
+        else:
+            injury = random.choice(INJURY_OPTIONS)
+            print("  You {injury} and suffer {damage} damage.".format(injury=injury,
+                                                                      damage=damage))
+
         # Give player between 20 and 100 xp
         xp += random.randrange(20, 101)
-
-        # I split up "you" and "suffer ..." simply to keep
-        # the line from getting to long, there's no real
-        # technical reason for it.
-        print("  In a run-in with a terrible", enemy, "you",
-              "suffer", damage, "damage.")
+        # Apply damage
         health -= damage
 
     if health > 0:
