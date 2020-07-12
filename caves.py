@@ -26,9 +26,9 @@ def clear():
 def show_player_status():
     # Print player status
     clear()
-    print("Player '" + name + "' Stats")
-    print("HP: " + str(health) + "/100")
-    print("Lvl: " + str(xp // 1000) + " (" + str(xp % 1000) + "/1000 xp)")
+    print("Player '{name}' Stats".format(name=name))
+    print("HP: {health}/100".format(health=health))
+    print("Lvl: {level} ({local_xp}/1000 xp)".format(level=xp // 1000, local_xp=xp % 1000))
     print("Gold:", gold)
     print("Caves survived:", caves_survived)
     print("\nYour inventory consists of these items:")
