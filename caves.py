@@ -85,7 +85,7 @@ while health > 0:
         else:
             print("\nInvalid choice. (you must type either 'left' or 'right')")
 
-    print("\n  You've selected the", choice, "cave.")
+    print("\n  You've selected the {choice} cave.".format(choice=choice))
     print("  You enter the cave, unsure of what awaits you...")
     press_enter()
 
