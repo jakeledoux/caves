@@ -151,4 +151,3 @@ while health > 0:
 clear()
 print("YOU DIED. GAME OVER.")
 print("Caves survived:", caves_survived)
-press_enter()
